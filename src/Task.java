@@ -7,7 +7,7 @@ public class Task {
     protected boolean hasSubTasks = false;
     private LinkedList subTasks;
     private int subTaskCount = 0;
-
+    ErrorChecking ErrorChecker = new ErrorChecking();
 
     Task(String inputTaskName, int inputPriority, String inputDesc, boolean inputBool)
     {
@@ -37,7 +37,7 @@ public class Task {
     {
         Scanner userInput = new Scanner(System.in);
         System.out.println("How many subtasks does this task have?");
-        subTaskCount = Integer.parseInt(userInput.nextLine().trim());
+        subTaskCount = Integer.parseInt(ErrorChecker.handleInteger());
         if (subTaskCount == 0) {
             hasSubTasks = false;
             return;

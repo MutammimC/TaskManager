@@ -9,13 +9,14 @@ TO DO:
 DONE:
     case 5:
     in LinkedList -> create a findTask method to do removeSubTasks
+    ErrorChecking integer and bool
 
     NOT DONE:
     Edit Tasks (6)
     Error Checking reorganize list(reorganize list in case order is messed up from editing a task)
 
 CURRENTLY DOING:
-    Error checking all integer inputs
+
 */
 public class TaskManager {
 

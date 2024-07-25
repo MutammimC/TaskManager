@@ -205,7 +205,7 @@ public class LinkedList {
             Scanner userInput = new Scanner(System.in);
             System.out.println("Enter the new task name");
             String newTaskName = userInput.nextLine();
-            String newTaskPriority = userInput.nextLine();
+            String newTaskPriority = ErrorChecker.handleInteger();
             String newTaskDescription = userInput.nextLine();
 
             taskToEdit.editTask(newTaskName,newTaskPriority,newTaskDescription);
