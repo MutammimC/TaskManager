@@ -13,7 +13,15 @@ public class LinkedList {
         while(currNode != null)
         {
             System.out.println(++taskCount + ":");
+
+
+            System.out.println();
+
             currNode.nodeTask.displayTask();
+
+            System.out.println();
+
+
             currNode = currNode.next;
         }
     }
@@ -29,8 +37,7 @@ public class LinkedList {
             {
                 if(inputTask.getTaskPriority() > currNode.getNodePriority())
                 {
-                    Node newHead = new Node(inputTask, currNode);
-                    head = newHead;
+                    head = new Node(inputTask, currNode);
                     break;
                 }
                 else if(currNode.next == null)
@@ -40,7 +47,6 @@ public class LinkedList {
                 }
                 else if(inputTask.getTaskPriority() >= currNode.next.getNodePriority())
                 {
-                    Node tempNextNext = currNode.next.next;
                     currNode.next = new Node(inputTask, currNode.next);
                     break;
                 }
@@ -209,6 +215,7 @@ public class LinkedList {
             String newTaskDescription = userInput.nextLine();
 
             taskToEdit.editTask(newTaskName,newTaskPriority,newTaskDescription);
+            UpdateList(findTask(newTaskName));
         }
     }
     void removeSubTask(String taskIdentifier)
@@ -219,15 +226,26 @@ public class LinkedList {
         {
             Scanner userInput = new Scanner(System.in);
             System.out.println("Enter Subtask name, priority, or P# of subtask");
-            removeTask.removeSubTask(userInput.nextLine());
+            String inputRemove = userInput.nextLine();
+            removeTask.removeSubTask(inputRemove);
+
         }
         else
         {
-            System.out.println("This task doesn't exist or this task has no subtasks");
+            System.out.println("This task doesn't exist or has no subtasks");
         }
     }
 
-
+    private void UpdateList(Task inputTask)
+    {
+        if(inputTask != null)
+        {
+            Task tempInputTask = inputTask;
+            removeTask(inputTask.getTaskName());
+            addTask(tempInputTask);
+            return;
+        }
+    }
     private static class Node
     {
         Node(Task insertTask, Node nextNode)

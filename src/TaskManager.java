@@ -1,5 +1,3 @@
-import java.awt.*;
-import java.io.InputStream;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
@@ -10,10 +8,10 @@ DONE:
     case 5:
     in LinkedList -> create a findTask method to do removeSubTasks
     ErrorChecking integer and bool
-
-    NOT DONE:
     Edit Tasks (6)
     Error Checking reorganize list(reorganize list in case order is messed up from editing a task)
+    NOT DONE:
+
 
 CURRENTLY DOING:
 
@@ -24,19 +22,38 @@ public class TaskManager {
     private LinkedList taskHolder = new LinkedList();
     ErrorChecking ErrorChecker = new ErrorChecking();
 
+
+    public void mainView()
+    {
+        int viewInput = -1;
+
+        taskHolder.displayList();
+
+        while(true)
+        {
+
+            switch(viewInput) {
+                case 0:
+                    return;
+                case 1:
+                    menu();
+                    break;
+                default:
+                    System.out.println("Type 0 to exit or Type 1 to go back to menu");
+            }
+            viewInput = Integer.parseInt(ErrorChecker.handleInteger());
+        }
+
+    }
     public void menu() throws InputMismatchException
     {
         Scanner userInput = new Scanner(System.in);
-
-
-
         int menuInput = -1;
 
         try
         {
             while (menuInput != 0) {
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
+                System.out.println("TASKS COMPLETED: " + tasksCompleted);
                 System.out.println("Welcome to the task manager, please choose the following actions");
                 System.out.println("Add a task (1)");
                 System.out.println("Remove a task (2)");
@@ -51,13 +68,14 @@ public class TaskManager {
                 menuInput = Integer.parseInt(ErrorChecker.handleInteger());
 
                 switch (menuInput) {
+                    case 0:
+                        System.out.println("Exited task manager");
+                        return;
                     case 1: //add task DONE
                         System.out.println("Enter the task name");
                         String taskName = userInput.nextLine().trim();
 
                         System.out.println("Enter a priority value");
-                        //int taskPriority = Integer.parseInt(userInput.nextLine().trim());
-
                         int taskPriority = Integer.parseInt(ErrorChecker.handleInteger());
 
                         System.out.println("Enter a description or no description");
@@ -69,7 +87,7 @@ public class TaskManager {
                         Task newTask = new Task(taskName, taskPriority, taskDescription, boolValue);
 
                         taskHolder.addTask(newTask);
-                        taskHolder.displayList();
+                        mainView();
                         break;
 
 
@@ -83,7 +101,7 @@ public class TaskManager {
 
 
                     case 3: //display task DONE
-                        taskHolder.displayList();
+                        mainView();
                         break;
 
 
@@ -114,10 +132,7 @@ public class TaskManager {
         } catch(InputMismatchException error)
         {
             System.out.println("INPUT ERROR");
-            error.printStackTrace();
-
         }
-
     }
     public static void main(String[] args)
     {

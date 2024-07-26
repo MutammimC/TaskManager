@@ -5,7 +5,7 @@ public class Task {
     private int taskPriority;
     private String description;
     protected boolean hasSubTasks = false;
-    private LinkedList subTasks;
+    protected LinkedList subTasks;
     private int subTaskCount = 0;
     ErrorChecking ErrorChecker = new ErrorChecking();
 
@@ -30,6 +30,26 @@ public class Task {
         this.taskPriority = -1;
         this.description = "Null";
         this.hasSubTasks = false;
+    }
+
+
+    public void displayTask()
+    {
+        System.out.println(taskName + '\n' + "Priority: " + taskPriority + '\n' + "Description: " + description + '\n' + '\n');
+
+        if(hasSubTasks)
+        {
+            System.out.println("SubTasks: ");
+            subTasks.displayList();
+        }
+    }
+
+
+    void editTask(String name, String Priority, String Description)
+    {
+        taskName = name;
+        taskPriority = Integer.parseInt(Priority);
+        this.description = Description;
     }
 
 
@@ -68,23 +88,6 @@ public class Task {
     }
 
 
-    public void displayTask()
-    {
-        System.out.println(taskName + '\n' + "Priority: " + taskPriority + '\n' + "Description: " + description + '\n' + '\n');
-
-        if(hasSubTasks)
-        {
-            System.out.println("SubTasks: ");
-            subTasks.displayList();
-        }
-    }
-
-    void editTask(String name, String Priority, String Description)
-    {
-        taskName = name;
-        taskPriority = Integer.parseInt(Priority);
-        this.description = Description;
-    }
 
     public int getTaskPriority() {
         return taskPriority;
